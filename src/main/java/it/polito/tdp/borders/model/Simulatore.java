@@ -28,8 +28,6 @@ public class Simulatore {
 //	chiave: paese, value: n° stanziati
 	Map<Country, Integer> stanziali;
 
-	
-	
 	/**
 	 * Metodo per inizializzare il simulatore
 	 * 
@@ -64,9 +62,9 @@ public class Simulatore {
 		while ((e = this.queue.poll()) != null) {
 
 //			ESEGUO L'EVENTO e
+			this.T = e.getT();
 
 //			1. mi recupero le info dell'evento
-			this.T = e.getT();
 			int nPersone = e.getN();
 			Country stato = e.getStato();
 
@@ -84,15 +82,15 @@ public class Simulatore {
 
 //					genero l'evento e lo aggiungo alla lista
 					queue.add(new Evento(e.getT() + 1, confinante, migranti));
-
-//					registro le stanziali nella mappa degli stanziali
-					int stanziali = nPersone - (migranti * vicini.size());
-
-//					NB: non posso sovrascrivere stanziali, perchè potrei esserci già passato
-//					SOLUZIONE: aggiungo al value precedente le stanziali nuove
-					this.stanziali.put(stato, this.stanziali.get(stato) + stanziali);
 				}
 			}
+
+//			4. Registro le stanziali nella mappa degli stanziali
+			int stanziali = nPersone - (migranti * vicini.size());
+
+//			NB: non posso sovrascrivere stanziali, perchè potrei esserci già passato
+//			SOLUZIONE: aggiungo al value precedente le stanziali nuove
+			this.stanziali.put(stato, this.stanziali.get(stato) + stanziali);
 
 		}
 	}
