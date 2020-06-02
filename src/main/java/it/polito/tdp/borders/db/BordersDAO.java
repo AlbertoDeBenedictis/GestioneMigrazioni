@@ -58,6 +58,8 @@ public class BordersDAO {
 	}
 	
 	public List<Country> getCountriesFromYear(int anno,Map<Integer,Country> countriesMap) {
+		
+//		stavolta query annidata, ma fondamentalmente è la stessa cosa
 		String sql = "select * from country " + 
 				"where CCode in ( " + 
 				"select state1no " + 
@@ -102,6 +104,8 @@ public class BordersDAO {
 	}
 	
 	public List<Adiacenza> getCoppieAdiacenti(int anno) {
+		
+//		uguale a quella fatta nel Lab09
 		String sql = "select state1no, state2no " + 
 				"from contiguity " + 
 				"where year<=? " + 
